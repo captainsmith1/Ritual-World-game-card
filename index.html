@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ritual Memory Card Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<audio id="bgMusic" loop>
+    <source src="bg-music.mp3" type="audio/mpeg">
+</audio>
+<body>
+
+  
+<div id="menu" class="menu">
+    <div class="title">
+    <img src="rituals worlds.png" class="game-title-img">
+</div>
+    
+    <button onclick="startGame()">▶ Play Game</button>
+    <button onclick="showGuide()">📖 Guide</button>
+    <button onclick="showCreator()">👤 Support Creator</button>
+</div>
+
+    <div class="game-container" id="game"></div>
+    <div id="winMessage" class="win-message">
+    <h2>🎉 Congratulations! 🎉</h2>
+    <button onclick="restartGame()">🔄 Play Again</button>
+    <button onclick="goHome()">🏠 Home</button>
+</div>
+<div id="scoreBox" class="score-box">
+    Score: <span id="score">0</span>
+</div>
+<div id="gameControls" class="controls">
+    <button onclick="restartGame()">🔄 Restart</button>
+    <button onclick="goHome()">🏠 Exit</button>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script src="app.js"></script>
+</body>
+</html>

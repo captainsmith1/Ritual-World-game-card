@@ -1,0 +1,320 @@
+/* ✅ KEEP UI ABOVE BLUR BACKGROUND */
+#game, .menu, .controls, .score-box, .win-message {
+    position: relative;
+    z-index: 2;
+}
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: url("gritual.png") no-repeat center center;
+    background-size: cover;
+
+    z-index: -1;
+    transition: 0.4s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  /* vertical center */
+    align-items: center;      /* horizontal center */
+    min-height: 100vh;
+}
+
+body.blur-bg::before {
+    filter: blur(10px) brightness(0.7);
+}
+h1 {
+    margin: 20px;
+}
+
+.game-container {
+    width: 400px;
+    display: none;
+
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+
+    justify-content: center;   /* ✅ center grid horizontally */
+    align-items: center;
+
+    margin: 40px auto 0 auto;  /* ✅ center block */
+    
+}
+
+.card {
+    width: 90px;
+    height: 120px;
+    position: relative;
+    cursor: pointer;
+    perspective: 1000px;
+
+
+}
+
+.card-image {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+}
+
+.card.flip .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    backface-visibility: hidden;
+}
+
+.card-front {
+    background: #333;
+}
+.card-front {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+}
+
+.card-back {
+    background: #00bcd4;
+    transform: rotateY(180deg);
+}
+.card-back {
+    background: rgba(0, 188, 212, 0.8);
+    box-shadow: 0 0 10px rgba(0, 188, 212, 0.7);
+}
+button {
+    margin-top: 20px;
+    padding: 12px 24px;
+    border: none;
+
+    /* ✨ GOLD GRADIENT */
+    background: linear-gradient(135deg, #FFD700, #FFC300, #FFB300);
+
+    color: #3b2f00; /* dark gold text */
+    font-weight: bold;
+    cursor: pointer;
+
+    border-radius: 12px;
+
+    /* ✨ GLOW + DEPTH */
+    box-shadow: 
+        0 4px 10px rgba(0,0,0,0.4),
+        0 0 10px rgba(255, 215, 0, 0.6);
+
+    transition: all 0.25s ease;
+}
+
+/* 🌟 HOVER EFFECT */
+button:hover {
+    transform: translateY(-3px) scale(1.05);
+
+    background: linear-gradient(135deg, #fff176, #ffd54f, #ffca28);
+
+    box-shadow: 
+        0 8px 20px rgba(0,0,0,0.5),
+        0 0 20px rgba(255, 215, 0, 0.9);
+}
+
+/* 👇 CLICK EFFECT */
+button:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+button:hover {
+    transform: translateY(-2px); /* 👈 slight lift */
+    box-shadow: 0 6px 15px rgba(0, 188, 212, 0.6); /* glow effect */
+}
+
+button:active {
+    transform: scale(0.95); /* 👈 click press effect */
+}
+button {
+    background: rgba(0, 188, 212, 0.8);
+    backdrop-filter: blur(5px);
+}
+ .logo {
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+    transform: translateY(2px); /* 👈 THIS fixes vertical misalignment */
+    filter: drop-shadow(0 0 5px #00bcd4);
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    25% { background-position: 50% 100%; }
+    50% { background-position: 100% 50%; }
+    75% { background-position: 50% 0%; }
+    100% { background-position: 0% 50%; }
+}
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+.logo {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+
+    filter: drop-shadow(0 0 6px #00bcd4);
+}
+.logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+.logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 5px #00bcd4);
+}
+.title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;  /* 👈 more breathing room */
+}
+.win-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    font-size: 28px;
+    text-align: center;
+    
+    background: linear-gradient(135deg, #3ddc97, #ff7a3d); /* 👈 your green → orange */
+    
+    color: white;
+    padding: 35px 50px;
+    border-radius: 20px;
+    display: none;
+    z-index: 1000;
+
+    box-shadow: 0 0 40px rgba(0,0,0,0.4);
+    backdrop-filter: blur(10px);
+
+    animation: popupShow 0.4s ease forwards;
+}
+
+.win-message button {
+    display: block;
+    margin: 10px auto;
+}
+
+@keyframes pop {
+    0% { transform: translate(-50%, -50%) scale(0.5); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+.menu {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.menu button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+}
+.menu {
+    transition: 0.3s;
+}
+.controls {
+    display: none;
+    margin-top: 20px;
+
+    justify-content: center;  /* ✅ center buttons */
+    align-items: center;
+    gap: 15px;
+}
+
+.controls button {
+    margin: 5px;
+
+}
+.score-box {
+    position: fixed;              /* 👈 important */
+    bottom: 90px;                 /* 👈 space above buttons */
+    left: 50%;
+    transform: translateX(-50%);  /* 👈 PERFECT center */
+
+    padding: 12px 30px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #ff4081;
+    font-weight: bold;
+    border-radius: 12px;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    font-size: 18px;
+
+    display: none;
+}
+
+.blur {
+    filter: blur(6px);
+    pointer-events: none;
+}
+#gameControls {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: none;
+    gap: 15px;
+}
+
+
+.score-box {
+    margin-top: 30px;
+}
+
+.controls {
+    margin-top: 15px;
+}
+.game-title-img {
+    width: 650px;       /* 👈 BIG */
+    max-width: 95%;     /* 👈 still fits mobile */
+    
+    filter: drop-shadow(0 12px 25px rgba(0,0,0,0.7));
+    
+    animation: floatTitle 3s ease-in-out infinite;
+}
+@keyframes floatTitle {
+    0%   { transform: translateY(0px) scale(1); }
+    50%  { transform: translateY(-12px) scale(1.05); }
+    100% { transform: translateY(0px) scale(1); }
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+}
+.game-title-img {
+    width: 320px;
+    max-width: 80%;
+}
